@@ -8,7 +8,7 @@ module.exports = {
    */
   apiPrefix: '/client',
 
-  staticFiles: path.resolve(__dirname, '../../frontend', 'build'),
+  staticFiles: path.join(__dirname, '../../frontend', 'build'),
 
   certificates: {
     key: fs.readFileSync(path.join(__dirname, '../certificates/key.pem')),
