@@ -5,7 +5,10 @@ exports.DB_NAME = process.env.DB_NAME || 'webook';
 exports.PORT = process.env.DB_PORT || 27017;
 
 // Url of the database
-exports.DB_HOST = process.env.DB_HOST||`mongodb://localhost:${exports.PORT}/${exports.DB_NAME}`;
+if (process.env.NODE_ENV === 'production')
+  exports.DB_HOST = 'mongodb+srv://root:password@cluster0-zqkg9.gcp.mongodb.net/test?retryWrites=true&w=majority;';
+else
+  exports.DB_HOST = `mongodb://localhost:${exports.PORT}/${exports.DB_NAME}`;
 
 // Configuration of database
 exports.DB_OPTIONS = {
