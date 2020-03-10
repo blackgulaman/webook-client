@@ -12,7 +12,6 @@ module.exports = async ({ app }) => {
   app.use(express.static(__dirname));
   app.use('/client', require('../api')(app));
   if (process.env.NODE_ENV === 'production') {
-    console.log('>>>>>>>>>>>>>>>>')
     app.use(express.static(configs.express.staticFiles));
     // Routes for serving the index.js of react
     app.get('/*', (req, res) => {
