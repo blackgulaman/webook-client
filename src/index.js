@@ -7,16 +7,16 @@ require('dotenv/config');
   const log = require('./libs/winston')('app.js');
   const configs = require('./configs');
 
-  // Load all the modules and configurations
-  await require('./loaders')({ app });
-
   // Initialize the service to be run
-  const service = configs.app.isHttp ?
-    require('http').Server(app) :
-    require('https').createServer(configs.express.certificates, app);
+  const server = configs.app.isHttp
+    ? require('http').Server(app)
+    : require('https').createServer(configs.express.certificates, app);
 
-  // It will run now the service with dedicated port
-  service.listen(configs.app.port, error => {
+  // Load all the modules and configurations
+  await require('./loaders')({ app, server });
+
+  // It will run now the server with dedicated port
+  server.listen(configs.app.port, error => {
     if (error) {
       log.error('Error running the service!');
       throw new Error('Error running the service!');
