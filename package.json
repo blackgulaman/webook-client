@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node bin/development.js",
     "dev": "node bin/development.js",
     "prod": "node bin/production.js"
   },
