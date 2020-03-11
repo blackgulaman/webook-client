@@ -10,12 +10,10 @@ const App = () => {
     <div>
       <Router history={history}>
         <Switch>
-          {/* <Route path="/" exact component={StreamList} /> */}
           <Route path="/login" exact component={SignIn} />
           <Route path="/signup" exact component={SignUp} />
         </Switch>
       </Router>
-      <SignIn />
     </div>
   );
 };

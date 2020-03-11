@@ -12,15 +12,11 @@ else
 
 // Configuration of database
 exports.DB_OPTIONS = {
-  dbName: exports.DB_NAME,
   useCreateIndex: true,
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
   autoIndex: true,
-  // autoReconnect: true,
-  // reconnectTries: Number.MAX_VALUE,
-  // reconnectInterval: 1000,
   poolSize: 10,
   bufferMaxEntries: 0
 };
