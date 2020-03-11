@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-module.exports = connection => {
+module.exports = (mongoose, connection) => {
   const schema = new mongoose.Schema(
     {
       email: String,
