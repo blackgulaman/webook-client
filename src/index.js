@@ -14,7 +14,6 @@ require('dotenv/config');
 
   // Load all the modules and configurations
   await require('./loaders')({ app, server });
-  console.log('test')
   // It will run now the server with dedicated port
   server.listen(configs.app.port, error => {
     if (error) {
