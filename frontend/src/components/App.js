@@ -2,8 +2,8 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from '../history';
 
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
 
 const App = () => {
   return (
