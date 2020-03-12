@@ -1,56 +1,61 @@
-import React, { useState, useEffect } from 'react'
-import Button from '@material-ui/core/Button'
-import GTranslate from '@material-ui/icons/GTranslateRounded'
+import React, { useState, useEffect } from 'react';
+import Button from '@material-ui/core/Button';
+import GTranslate from '@material-ui/icons/GTranslateRounded';
 
-function useOAuth2() {
-  const [auth, setAuth] = useState()
+const useOAuth2 = () => {
+  const [auth, setAuth] = useState();
   useEffect(() => {
-    if (!window || !window.gapi) return
+    if (!window || !window.gapi) return;
     window.gapi.load('client:auth2', e => {
       window.gapi.client
         .init({
           clientId:
             '716470922713-3obi1k4ns5p90oj6svjo6m89u5odtfng.apps.googleusercontent.com',
-          scope: 'profile'
+          scope: 'profile email'
         })
         .then(() => {
-          setAuth(window.gapi.auth2.getAuthInstance())
-        })
-    })
-  }, [])
-  return auth
-}
+          setAuth(window.gapi.auth2.getAuthInstance());
+        });
+    });
+  }, []);
+  return auth;
+};
 
 export default function GoogleAuth() {
-  const auth = useOAuth2()
+  const auth = useOAuth2();
 
   const onAuthChange = isSignedIn => {
-    console.log(isSignedIn)
+    console.log(isSignedIn);
     if (isSignedIn) {
       const profile = window.gapi.auth2
         .getAuthInstance()
         .currentUser.get()
-        .getBasicProfile()
-      console.log(profile)
+        .getBasicProfile();
+      console.log('ID: ' + profile.getId());
+      console.log('Full Name: ' + profile.getName());
+      console.log('Given Name: ' + profile.getGivenName());
+      console.log('Family Name: ' + profile.getFamilyName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail());
     } else {
     }
-  }
+  };
 
   const onSignInClick = () => {
-    auth.signIn()
-  }
+    auth.signIn();
+  };
 
   const onSignOutClick = () => {
-    auth.signOut()
-  }
+    auth.signOut();
+  };
 
   useEffect(() => {
-    console.log(auth)
+    console.log(auth);
     if (auth) {
-      onAuthChange(auth.isSignedIn.get())
-      auth.isSignedIn.listen(onAuthChange)
+      onAuthChange(auth.isSignedIn.get());
+      auth.isSignedIn.listen(onAuthChange);
     }
-  }, [auth])
+  }, [auth]);
 
   return (
     <div>
@@ -63,7 +68,7 @@ export default function GoogleAuth() {
         Continue with Google
       </Button>
     </div>
-  )
+  );
 }
 
 // // import { connect } from 'react-redux';

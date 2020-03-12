@@ -1,6 +1,9 @@
+
+
 module.exports = (mongoose, connection) => {
   const schema = new mongoose.Schema(
     {
+      gmailId: String,
       email: String,
       username: String,
       password: String,
@@ -8,10 +11,11 @@ module.exports = (mongoose, connection) => {
       middleName: String,
       lastName: String,
       gender: String,
+      image: String,
       age: Number,
-      ContactNo: String,
-      CreationType: String,
-      Status: String
+      contactNo: String,
+      creationType: String,
+      status: String
     },
     { timestamps: { createdAt: 'createdOn', updatedAt: 'updatedOn' } }
   );
