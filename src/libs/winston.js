@@ -1,4 +1,4 @@
-const { createLogger, format, transports, add } = require('winston');
+const { createLogger, format, transports } = require('winston');
 
 module.exports = filename => {
   const myFormat = format.printf(({ timestamp, level, message, ...extra }) => {

@@ -31,7 +31,9 @@ module.exports = route => {
   route.post('/test', verifyToken, async (req, res) => {
     res.sendStatus(200);
   })
-  route.post('/login', verifyToken, async (req, res) => {
+  route.post('/login', async (req, res) => {
+    const token = await jwt.sign({ user: 'test' }, 'secreeeettee');
+    log.error('Error in try catch ', token);
     res.sendStatus(200);
   })
 };
