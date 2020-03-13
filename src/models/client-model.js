@@ -1,5 +1,3 @@
-
-
 module.exports = (mongoose, connection) => {
   const schema = new mongoose.Schema(
     {
@@ -15,9 +13,9 @@ module.exports = (mongoose, connection) => {
       age: Number,
       contactNo: String,
       creationType: String,
-      status: String
+      status: String,
     },
-    { timestamps: { createdAt: 'createdOn', updatedAt: 'updatedOn' } }
+    { timestamps: { createdAt: 'createdOn', updatedAt: 'updatedOn' } },
   );
   return connection.model('Clients', schema);
 };

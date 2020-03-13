@@ -10,8 +10,8 @@ class mongodbHelper {
   connect() {
     try {
       const self = this;
-      const db = this.mongoose.connection;
       let connection = null;
+
       connection = this.mongoose.createConnection(self.host, self.options);
       connection.on('connecting', () => {
         log.info('MongoDB is connecting!');
@@ -33,7 +33,7 @@ class mongodbHelper {
 
       connection.on('error', error => {
         log.error('MongoDB has error!', error);
-        mongoose.disconnect();
+        self.mongoose.disconnect();
         return false;
       });
 

@@ -13,7 +13,7 @@ require('dotenv/config');
     : require('https').createServer(configs.express.certificates, app);
 
   // Load all the modules and configurations
-  await require('./loaders')({ app, server });
+  await require('./loaders')({ app, server, configs });
   // It will run now the server with dedicated port
   server.listen(configs.app.port, error => {
     if (error) {

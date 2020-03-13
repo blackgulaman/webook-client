@@ -16,10 +16,11 @@ module.exports = async () => {
     // Connection for webook db
     const connection = await webookHelper.connect();
     container.set('webookDbConnection', connection);
-    
+
     if (!container.get('webookDbConnection'))
       throw new Error('Failed to connect to database');
-    return container.get('webookDbConnection');
+    
+      return container.get('webookDbConnection');
   } catch (error) {
     log.error('Error in catch! ', error);
     return null;

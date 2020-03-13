@@ -7,8 +7,7 @@ const connection = container.get('webookDbConnection');
 const schema = new mongoose.Schema(
   {
     gmailId: String,
-    email: String,
-    username: String,
+    email: { type: String, unique: true },
     password: String,
     firstName: String,
     middleName: String,

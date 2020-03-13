@@ -1,11 +1,11 @@
 const clients = require('./client-model');
-class database {
-  find() {}
-  async save(data) {
-    const client = new clients(data);
-    const newClient = client.save();
-    return newClient;
+const dalHelper = require('../../libs/dal-helper');
+const logger = require('../../libs/winston')('client/client-dal');
+
+class database extends dalHelper {
+  constructor() {
+    super(clients, logger);
   }
 }
 
-module.exports = database;
+module.exports = new database();
