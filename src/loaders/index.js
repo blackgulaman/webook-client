@@ -5,15 +5,17 @@ module.exports = async ({ app, server, configs }) => {
   log.info('MongoDB is now initialized!');
 
   // Load the sessions
-  const { expressSession, cookieParser, sessionStore } = await require('./session')({ app, configs });
+  const {
+    expressSession,
+    cookieParser,
+    sessionStore
+  } = await require('./session')({ app, configs });
   log.info('Session is successfully loaded!');
 
   // Load the express setup
   await require('./express')({ app, configs, expressSession, cookieParser });
   log.info('Express is successfully loaded!');
 
-  await require('./socket-io')({ server })
-  await
-
-    log.info('Socket.io is successfully loaded!');
+  await require('./socket-io')({ server });
+  log.info('Socket.io is successfully loaded!');
 };

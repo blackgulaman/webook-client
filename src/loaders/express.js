@@ -9,14 +9,14 @@ const serveFavicon = require('serve-favicon');
 const expressUseragent = require('express-useragent');
 
 const log = require('../libs/winston')('loaders/express.js');
-const middlewares = require('../middlewares')
+const middlewares = require('../middlewares');
 
 module.exports = async ({ app, configs, cookieParser, expressSession }) => {
   try {
     // Cross origin resources
     app.use(cors({ creditials: true }));
 
-    //Helmet helps you secure your Express apps by setting various HTTP headers. 
+    //Helmet helps you secure your Express apps by setting various HTTP headers.
     //It's not a silver bullet, but it can help!
     app.use(helmet());
 
@@ -45,8 +45,10 @@ module.exports = async ({ app, configs, cookieParser, expressSession }) => {
 
     app.use('/client', require('../components')(app));
 
-    if (process.env.NODE_ENV === 'production') {
-      app.use(serveFavicon(path.join(configs.express.staticFiles, 'favicon.ico')));
+    if (process.env.NODE_ENV === 'production' || !process.env.NODE_ENV) {
+      app.use(
+        serveFavicon(path.join(configs.express.staticFiles, 'favicon.ico'))
+      );
       app.use(express.static(configs.express.staticFiles));
       // Routes for serving the index.js of react
       app.get('/*', (req, res) => {
@@ -55,6 +57,6 @@ module.exports = async ({ app, configs, cookieParser, expressSession }) => {
     }
     app.use(middlewares.errorRoutes);
   } catch (error) {
-    log.error('Error in catch for express ', error)
+    log.error('Error in catch for express ', error);
   }
 };

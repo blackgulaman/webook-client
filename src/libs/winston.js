@@ -19,7 +19,6 @@ module.exports = filename => {
     ),
     transports: [
       new transports.Console({
-        handleExceptions: true,
         level: 'debug',
         format: format.combine(format.colorize(), myFormat)
       }),

@@ -17,7 +17,7 @@ const schema = new mongoose.Schema(
     age: Number,
     contactNo: String,
     creationType: String,
-    status: String
+    status: String,
   },
   { timestamps: { createdAt: 'createdOn', updatedAt: 'updatedOn' } }
 );
