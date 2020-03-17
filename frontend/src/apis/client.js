@@ -1,7 +1,7 @@
 import axios from 'axios';
 import JWTDecode from 'jwt-decode';
 import LocalStorageSerice from '../services/LocalStorageService';
-import history from '../history';
+// import { useHistory } from 'react-router-dom';
 
 const instance = axios.create({
   baseURL: 'http://localhost:9000/client'
@@ -29,7 +29,9 @@ instance.interceptors.response.use(
     const logout = () => {
       originalRequest._retry = false;
       LocalStorageSerice.clearToken();
-      history.push('/client/signin');
+      window.location = '/client/signin';
+      // const history = useHistory();
+      // history.push('/client/signin');
     };
     // These condition is to prevent to infinite loop of request
     if (response.config.url.includes('/client/signin'))

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 
 import Button from '@material-ui/core/Button';
@@ -21,29 +22,7 @@ import VisibilityOffOutlined from '@material-ui/icons/VisibilityOffOutlined';
 
 import useStyles from './style';
 import asyncValidate from './asyncValidate';
-
-const validate = values => {
-  const errors = {};
-  const requiredFields = [
-    'firstName',
-    'lastName',
-    'email',
-    'businessName',
-    'password'
-  ];
-  for (const field of requiredFields) {
-    if (!values[field]) {
-      errors[field] = 'This field is required.';
-    }
-  }
-  if (
-    values.email &&
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-  ) {
-    errors.email = 'Invalid email address';
-  }
-  return errors;
-};
+import { authAction } from '../../actions';
 
 const renderTextField = ({
   label,
@@ -56,10 +35,14 @@ const renderTextField = ({
       <Grid
         item
         xs={
-          asyncValidating || (touched && !error && !custom.showloading) ? 11 : 12
+          asyncValidating || (touched && !error && !custom.showloading)
+            ? 11
+            : 12
         }
         sm={
-          asyncValidating || (touched && !error && !custom.showloading) ? 11 : 12
+          asyncValidating || (touched && !error && !custom.showloading)
+            ? 11
+            : 12
         }
       >
         <TextField
@@ -99,6 +82,8 @@ const renderTextField = ({
 
 const Signup = () => {
   const classes = useStyles();
+  const formValues = useSelector(state => state.form.signupForm.values);
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
     password: '',
     showPassword: false
@@ -110,6 +95,11 @@ const Signup = () => {
 
   const handleMouseDownPassword = event => {
     event.preventDefault();
+  };
+
+  const onButtonClick = () => {
+    console.log('test', formValues);
+    dispatch(authAction.signUp(formValues));
   };
 
   return (
@@ -226,7 +216,12 @@ const Signup = () => {
               />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <Button variant="contained" color="primary" fullWidth>
+              <Button
+                onClick={onButtonClick}
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
                 Create WeBook Account
               </Button>
             </Grid>
@@ -235,6 +230,29 @@ const Signup = () => {
       </div>
     </Container>
   );
+};
+
+const validate = values => {
+  const errors = {};
+  const requiredFields = [
+    'firstName',
+    'lastName',
+    'email',
+    'businessName',
+    'password'
+  ];
+  for (const field of requiredFields) {
+    if (!values[field]) {
+      errors[field] = 'This field is required.';
+    }
+  }
+  if (
+    values.email &&
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+  ) {
+    errors.email = 'Invalid email address';
+  }
+  return errors;
 };
 
 export default reduxForm({

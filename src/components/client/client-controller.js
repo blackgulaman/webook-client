@@ -42,12 +42,24 @@ module.exports = route => {
       log.error('Error in signup try catch ', error);
     }
   });
-  route.post('/signup', verifyToken, async (req, res) => {
+  route.post('/signup', async (req, res) => {
     try {
-      // const { gmailId, email, firstName, lastName, image } = req.body;
-      // const newUser = await service.signIn()
-      // res.send(newUser);
+      const { error = null, client } = await service.signUp(req.body);
+      console.log(error, client);
       res.send('success');
+    } catch (error) {
+      log.error('Error in signup try catch ', error);
+    }
+  });
+
+  route.post('/validate-signup', async (req, res) => {
+    try {
+      console.log(req.body);
+      if (req.body) {
+        const { status, error } = await service.checkDataValidity(req.body);
+        if (error) return res.sendStatus(500);
+        res.send({ isExisting: status });
+      }
     } catch (error) {
       log.error('Error in signup try catch ', error);
     }
