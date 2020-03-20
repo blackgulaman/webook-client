@@ -15,5 +15,9 @@ export default makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  bottomNavigation: {
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 }));
