@@ -101,24 +101,23 @@ const SignupSecondPage = props => {
         </div>
         <form className={classes.form} onSubmit={props.handleSubmit}>
          
-            <Grid item xs={12} sm={12} className={classes.bottomNavigation}>
-              <Button
-                onClick={props.previousPage}
-                variant="contained"
-                color="primary"
-                startIcon={<NavigateBeforeIcon>send</NavigateBeforeIcon>}
-              >
-                Previous
-              </Button>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                endIcon={<NavigateNextIcon>send</NavigateNextIcon>}
-              >
-                Next
-              </Button>
-            </Grid>
+          <Grid item xs={12} sm={12} className={classes.bottomNavigation}>
+            <Button
+              onClick={props.previousPage}
+              variant="contained"
+              color="primary"
+              startIcon={<NavigateBeforeIcon>send</NavigateBeforeIcon>}
+            >
+              Previous
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              endIcon={<NavigateNextIcon>send</NavigateNextIcon>}
+            >
+              Next
+            </Button>
           </Grid>
         </form>
       </div>
